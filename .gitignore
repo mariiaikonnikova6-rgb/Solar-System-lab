@@ -1,0 +1,20 @@
+*.pyc
+__pycache__/
+.DS_Store
+.venv/
+venv/
+env/
+.env
+db.sqlite3
+db.sqlite3.bak_*
+staticfiles/
+*.zip
+
+# Django
+*.log
+local_settings.py
+
+# Node (if frontend added later)
+node_modules/
+dist/
+*.map

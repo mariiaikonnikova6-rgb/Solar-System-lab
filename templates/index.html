@@ -1,0 +1,162 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Solar System Lab</title>
+    <link rel="icon" href="{% static 'app/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'app/styles.css' %}?v=20251222" />
+  </head>
+  <body class="landing-active">
+    <div id="landing" class="landing" role="dialog" aria-modal="true">
+      <div class="landing__content">
+        <div class="landing__title" id="landing-title">Solar System Lab</div>
+        <div class="landing__slogan" id="landing-slogan">Твій Всесвіт у вікні браузера</div>
+        <button class="btn btn--hero" id="enter-scene">Перейти до сцени</button>
+      </div>
+    </div>
+    <div id="app" class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand__title" id="brand-title">Solar System Lab</div>
+          <div class="lang-toggle">
+            <button id="lang-ua" class="chip chip--flag" aria-label="Українська"></button>
+            <button id="lang-en" class="chip chip--flag" aria-label="English"></button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab" data-mode="explore">Explore</button>
+          <button class="tab" data-mode="random">Random</button>
+          <button class="tab" data-mode="compare">Compare</button>
+          <button class="tab" data-mode="search">Search</button>
+          <button class="tab" data-mode="kepler">Kepler Lab</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel__title" id="observer-title">Observer</div>
+          <div class="panel__row">
+            <button class="btn" data-observer="sun" id="obs-sun">Sun</button>
+            <button class="btn" data-observer="earth" id="obs-earth">Earth</button>
+          </div>
+          <div class="panel__row">
+            <select id="obs-planet" class="select">
+              <option value="">From selected planet…</option>
+              <option>Mercury</option>
+              <option>Venus</option>
+              <option>Earth</option>
+              <option>Mars</option>
+              <option>Jupiter</option>
+              <option>Saturn</option>
+              <option>Uranus</option>
+              <option>Neptune</option>
+            </select>
+          </div>
+          <div class="panel__row">
+            <button class="btn" data-observer="follow" id="obs-follow">Follow selected</button>
+            <button class="btn" data-observer="free" id="obs-free">Free fly</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__title" id="time-title">Time</div>
+          <div class="panel__row">
+            <button class="btn" id="time-toggle">Play</button>
+            <div class="pill"><span id="time-scale-label">×1</span></div>
+          </div>
+          <div class="panel__row panel__row--tight">
+            <div class="rangehead">
+              <span class="rangehead__title" id="time-speed-title">Speed</span>
+              <span class="rangehead__value" id="time-speed-value">×1</span>
+            </div>
+          </div>
+          <div class="panel__row">
+            <input id="time-scale" class="range" type="range" min="0" max="6" step="1" value="2" />
+          </div>
+          <div class="panel__row panel__row--tight">
+            <div class="rangehead">
+              <span class="rangehead__title" id="time-offset-title">Offset (days)</span>
+              <span class="rangehead__value" id="time-offset-value">0d</span>
+            </div>
+          </div>
+          <div class="panel__row">
+            <input id="time-scrub" class="range" type="range" min="-3650" max="3650" step="1" value="0" />
+          </div>
+          <div class="hint" id="time-hint">Scrub days around epoch</div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__title" id="asteroid-scale-title">Asteroid scale</div>
+          <div class="panel__row panel__row--tight">
+            <div class="rangehead">
+              <span class="rangehead__title" id="asteroid-scale-label">Scale</span>
+              <span class="rangehead__value" id="asteroid-scale-value">1.00×</span>
+            </div>
+          </div>
+          <div class="panel__row">
+            <input id="asteroid-scale" class="range" type="range" min="0" max="100" step="1" value="83" />
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__title" id="scale-mode-title">Scale mode</div>
+          <div class="panel__row" id="scale-mode-toggle">
+            <button class="btn" data-scale="visual" id="scale-visual">Visualization</button>
+            <button class="btn" data-scale="real" id="scale-real">Real scale</button>
+          </div>
+          <div class="panel__row">
+            <button class="btn" id="scale-comfort">Comfort view</button>
+          </div>
+        </div>
+
+        <div class="panel" id="layers-panel">
+          <div class="panel__title" id="layers-title">Layers</div>
+          <div class="panel__grid">
+            <label class="toggle"><input type="checkbox" id="layer-planet-orbits" checked /> <span class="swatch swatch--planet-orbits" aria-hidden="true"></span> <span id="layer-planet-orbits-label">Planet orbits</span></label>
+            <label class="toggle"><input type="checkbox" id="layer-planets" checked /> <span class="swatch swatch--planets" aria-hidden="true"></span> <span id="layer-planets-label">Planets</span></label>
+            <label class="toggle"><input type="checkbox" id="layer-mainbelt" checked /> <span class="swatch swatch--mainbelt" aria-hidden="true"></span> <span id="layer-mainbelt-label">Main-belt</span></label>
+            <label class="toggle"><input type="checkbox" id="layer-neo" checked /> <span class="swatch swatch--neo" aria-hidden="true"></span> <span id="layer-neo-label">NEO</span></label>
+            <label class="toggle"><input type="checkbox" id="layer-trojans" /> <span class="swatch swatch--trojan" aria-hidden="true"></span> <span id="layer-trojans-label">Trojans</span></label>
+            <label class="toggle"><input type="checkbox" id="layer-comets" /> <span class="swatch swatch--comet" aria-hidden="true"></span> <span id="layer-comets-label">Comets</span></label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="hint" id="sample-note">Sample: 5,000 asteroids</div>
+        </div>
+
+        <div class="panel" id="mode-panel"></div>
+        <div class="panel footer">
+          <button class="btn btn--ghost" id="share-link">Share link</button>
+          <span class="hint" id="share-status"></span>
+        </div>
+      </aside>
+
+      <main class="stage">
+        <button
+          id="sidebar-toggle"
+          class="sidebar-toggle"
+          type="button"
+          aria-label="Сховати бічну панель"
+          title="Сховати бічну панель"
+        >
+          ⟨
+        </button>
+        <canvas id="c"></canvas>
+        <div id="tooltip" class="tooltip" hidden></div>
+        <div id="hud" class="hud"></div>
+      </main>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "{% static 'vendor/three/build/three.module.js' %}",
+          "three/addons/": "{% static 'vendor/three/addons/' %}"
+        }
+      }
+    </script>
+    <script type="module" src="{% static 'app/main.js' %}?v=20251222"></script>
+  </body>
+</html>
